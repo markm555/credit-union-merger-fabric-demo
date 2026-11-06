@@ -1,0 +1,18 @@
+role 'Security Scope'
+	modelPermission: read
+
+	tablePermission 'dim_branch' =
+			VAR AllowedRegions =
+			    CALCULATETABLE(
+			        VALUES('security_user_scope'[Region]),
+			        FILTER(
+			            'security_user_scope',
+			            'security_user_scope'[UserUPN] = USERPRINCIPALNAME()
+			        )
+			    )
+			RETURN
+			    CONTAINS(AllowedRegions, 'security_user_scope'[Region], "ALL")
+			    || CONTAINS(AllowedRegions, 'security_user_scope'[Region], 'dim_branch'[Region])
+
+	annotation PBI_Id = 45c6ed5c6f2e4a35a122aac1b38298cd
+

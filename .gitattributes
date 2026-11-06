@@ -1,0 +1,5 @@
+* text=auto
+*.tmdl text eol=lf
+*.json text eol=lf
+*.sql text eol=crlf
+*.csv text eol=lf

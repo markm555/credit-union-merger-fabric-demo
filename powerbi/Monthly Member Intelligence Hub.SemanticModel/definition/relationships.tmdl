@@ -1,0 +1,21 @@
+relationship 7138949d-2b18-46e9-858c-5bb08b32bda1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'dim_month'.MonthStart
+	toColumn: LocalDateTable_863c70b5-8b07-49ee-b9fa-25dd256f53d2.Date
+
+relationship AutoDetected_b15b4ed4-4af6-43c1-b5f9-7f66fd6a4dd0
+	fromColumn: 'fact_driver_breakdown'.SourceBranchKey
+	toColumn: 'dim_branch'.SourceBranchKey
+
+relationship AutoDetected_d31b4b30-eac0-42c5-b971-514f22f9a26b
+	fromColumn: 'fact_monthly_kpi'.SourceBranchKey
+	toColumn: 'dim_branch'.SourceBranchKey
+
+relationship 15253078-7cb7-d8de-1823-69d5f8ed95ed
+	fromColumn: 'fact_monthly_kpi'.MonthStart
+	toColumn: 'dim_month'.MonthStart
+
+relationship 43c0959b-258b-097d-e6ce-0bc576343f1d
+	fromColumn: 'fact_driver_breakdown'.MonthStart
+	toColumn: 'dim_month'.MonthStart
+

@@ -1,0 +1,13 @@
+BranchId,BranchName,Region,State
+BR001,Seattle Downtown,North,WA
+BR002,Redmond,North,WA
+BR003,Bellevue,North,WA
+BR004,Portland Pearl,North,OR
+BR005,Boise,North,ID
+BR006,San Jose,West,CA
+BR007,Sunnyvale,West,CA
+BR008,San Francisco SoMa,West,CA
+BR009,Sacramento,West,CA
+BR010,Austin,South,TX
+BR011,Phoenix,South,AZ
+BR012,Raleigh,East,NC

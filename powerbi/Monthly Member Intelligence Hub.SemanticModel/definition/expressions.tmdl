@@ -1,0 +1,9 @@
+expression SqlEndpoint = "<your-warehouse-sql-endpoint>.datawarehouse.fabric.microsoft.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 22e6adb5-09e8-4a34-93bc-6e840acbd8c9
+
+	annotation PBI_ResultType = Text
+
+expression WarehouseName = "Combined_Data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0edaa70e-6b72-4ded-b391-7a125317ec32
+
+	annotation PBI_ResultType = Text

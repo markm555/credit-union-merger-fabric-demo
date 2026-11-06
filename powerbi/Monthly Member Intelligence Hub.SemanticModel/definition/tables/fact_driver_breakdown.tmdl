@@ -1,0 +1,89 @@
+table 'fact_driver_breakdown'
+	lineageTag: 786a332e-64a3-4905-8236-8fe576ac4b0e
+
+	/// Sum of driver impact scores. Positive values help branch performance, negative values hurt it.
+	measure 'Driver Impact' = SUM('fact_driver_breakdown'[ImpactScore])
+		lineageTag: 708ce757-3a47-4ba3-8c95-4858f781c0d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Legacy organization the record came from: Contoso CU or Fabrikam CU.
+	column SourceCU
+		dataType: string
+		lineageTag: dd5d55ec-0f1f-4a59-b8f0-c2c2c58560b5
+		summarizeBy: none
+		sourceColumn: SourceCU
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Branch key that is unique across the merged organization (CON- or FAB- prefix plus the legacy branch code).
+	column SourceBranchKey
+		dataType: string
+		lineageTag: b2484422-3933-4b64-8f66-664784205a6a
+		summarizeBy: none
+		sourceColumn: SourceBranchKey
+
+		annotation SummarizationSetBy = Automatic
+
+	/// First day of the reporting month.
+	column MonthStart
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ea6a5d86-c194-45b8-81eb-5b2b5e1e1535
+		summarizeBy: none
+		sourceColumn: MonthStart
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Legacy branch code. Not unique across the merged organization; use SourceBranchKey to join.
+	column BranchId
+		dataType: string
+		lineageTag: a427d51b-2a19-46c9-a255-30dbe12ec55a
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		annotation SummarizationSetBy = Automatic
+
+	column DriverName
+		dataType: string
+		lineageTag: 8af054f1-7edb-46a1-93b0-b7d15623798d
+		summarizeBy: none
+		sourceColumn: DriverName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ImpactScore
+		dataType: double
+		lineageTag: e8c7df33-0951-4047-874b-322979ccfbf7
+		summarizeBy: sum
+		sourceColumn: ImpactScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DriverValue
+		dataType: double
+		lineageTag: f0f76b63-42bd-42d3-b88f-a82bb55d7cbf
+		summarizeBy: sum
+		sourceColumn: DriverValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_driver_breakdown = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlEndpoint, WarehouseName),
+				    Data = Source{[Schema="combined",Item="fact_driver_breakdown"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

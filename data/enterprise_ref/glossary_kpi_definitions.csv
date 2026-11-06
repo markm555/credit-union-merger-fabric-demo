@@ -1,0 +1,6 @@
+KPI,Definition,Owner,Calculation
+LoansBooked,Count of newly funded consumer and small-business loans in the month.,Retail Finance,SUM(fact_monthly_kpi[LoansBooked])
+DepositGrowthPct,Month-over-month percentage growth of total deposit balances.,Treasury Analytics,(CurrentMonthDeposits - PriorMonthDeposits) / PriorMonthDeposits * 100
+NPS,Net Promoter Score from member post-interaction surveys (promoters % minus detractors %).,Member Experience,Promoters% - Detractors%
+DelinquencyRatePct,"Certified enterprise definition: share of the loan portfolio 30+ days past due, in percent. Replaces the legacy Fabrikam 60+ day metric.",Enterprise Credit Risk,DelinquentBalance30Plus / TotalLoanBalance * 100
+DigitalAdoptionPct,Percent of active members who used at least one digital channel in the month.,Digital Banking,DigitalActiveMembers / ActiveMembers * 100

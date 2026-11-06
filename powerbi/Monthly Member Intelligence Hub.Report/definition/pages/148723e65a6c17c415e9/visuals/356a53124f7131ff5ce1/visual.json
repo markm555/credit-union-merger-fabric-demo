@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "356a53124f7131ff5ce1",
+  "position": {
+    "x": 1572.7659574468084,
+    "y": 99.209726443769,
+    "z": 7,
+    "height": 300,
+    "width": 300
+  },
+  "visual": {
+    "visualType": "gauge",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_driver_breakdown"
+                    }
+                  },
+                  "Property": "Driver Impact"
+                }
+              },
+              "queryRef": "fact_driver_breakdown.Driver Impact",
+              "nativeQueryRef": "Driver Impact"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_driver_breakdown"
+                  }
+                },
+                "Property": "Driver Impact"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b496f451c3b2ab1edaa7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_driver_breakdown"
+              }
+            },
+            "Property": "Driver Impact"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "cce919fa772572ed3f7d",
+  "position": {
+    "x": 676.21621621621614,
+    "y": 475.1351351351351,
+    "z": 4,
+    "height": 540,
+    "width": 638.91891891891885,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_branch"
+                    }
+                  },
+                  "Property": "BranchName"
+                }
+              },
+              "queryRef": "dim_branch.BranchName",
+              "nativeQueryRef": "BranchName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_monthly_kpi"
+                    }
+                  },
+                  "Property": "Avg NPS"
+                }
+              },
+              "queryRef": "fact_monthly_kpi.Avg NPS",
+              "nativeQueryRef": "Avg NPS"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_monthly_kpi"
+                  }
+                },
+                "Property": "Avg NPS"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e31749d0eaeea270d792",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_branch"
+              }
+            },
+            "Property": "BranchName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "70c3acd9ee84fd05f59c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_monthly_kpi"
+              }
+            },
+            "Property": "Avg NPS"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

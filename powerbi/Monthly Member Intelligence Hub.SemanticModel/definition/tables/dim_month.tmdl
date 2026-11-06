@@ -1,0 +1,40 @@
+table 'dim_month'
+	lineageTag: c03a53f4-0467-432d-a483-35aba6f0a4e1
+
+	/// First day of the reporting month.
+	column MonthStart
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 98ff88f1-d7fd-4438-9ca3-bc0245765e53
+		summarizeBy: none
+		sourceColumn: MonthStart
+
+		variation Variation
+			isDefault
+			relationship: 7138949d-2b18-46e9-858c-5bb08b32bda1
+			defaultHierarchy: LocalDateTable_863c70b5-8b07-49ee-b9fa-25dd256f53d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	hierarchy 'MonthStart Hierarchy'
+		lineageTag: 2b1edf15-817e-4c02-915c-3d578d682a44
+
+		level MonthStart
+			lineageTag: 19cf306f-77dc-4e63-a243-c7184c283d7c
+			column: MonthStart
+
+	partition dim_month = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlEndpoint, WarehouseName),
+				    Data = Source{[Schema="combined",Item="dim_month"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

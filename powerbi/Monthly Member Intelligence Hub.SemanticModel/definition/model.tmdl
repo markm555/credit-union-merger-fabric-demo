@@ -1,0 +1,28 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_branch","dim_month","fact_driver_breakdown","fact_monthly_kpi","glossary_kpi_definitions","security_user_scope"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'dim_branch'
+ref table 'dim_month'
+ref table DateTableTemplate_2a29916d-ce05-46ae-8a54-726b38224e57
+ref table LocalDateTable_863c70b5-8b07-49ee-b9fa-25dd256f53d2
+ref table 'fact_driver_breakdown'
+ref table 'fact_monthly_kpi'
+ref table 'glossary_kpi_definitions'
+ref table 'security_user_scope'
+
+ref role 'Security Scope'
+
+ref cultureInfo en-US
+

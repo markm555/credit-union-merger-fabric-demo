@@ -1,0 +1,141 @@
+table 'fact_monthly_kpi'
+	lineageTag: 2176b3d8-84e9-4335-911c-b9bada9fee55
+
+	/// Count of newly funded consumer and small-business loans. Certified KPI, owner: Retail Finance.
+	measure 'Loans Booked' = SUM('fact_monthly_kpi'[LoansBooked])
+		formatString: 0
+		lineageTag: 4343b08b-e730-4734-9ecb-887c9b34db64
+
+	/// Average month-over-month percentage growth of total deposit balances, in percent. Certified KPI, owner: Treasury Analytics.
+	measure 'Avg Deposit Growth %' = AVERAGE('fact_monthly_kpi'[DepositGrowthPct])
+		lineageTag: fd8345b8-9b18-4eca-a009-55d2cb1ba4d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average Net Promoter Score from member post-interaction surveys (promoters % minus detractors %). Certified KPI, owner: Member Experience.
+	measure 'Avg NPS' = AVERAGE('fact_monthly_kpi'[NPS])
+		lineageTag: 9095685f-49b5-49bc-8316-4cbdae53231b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average share of the loan portfolio 30+ days past due, in percent. Certified enterprise definition for both legacy organizations; replaces the legacy Fabrikam 60+ day metric. Owner: Enterprise Credit Risk.
+	measure 'Delinquency %' = AVERAGE('fact_monthly_kpi'[DelinquencyRatePct])
+		lineageTag: b71816de-4248-497a-b7fe-f4b7176bfc59
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average percent of active members who used at least one digital channel in the month. Certified KPI, owner: Digital Banking.
+	measure 'Digital Adoption %' = AVERAGE('fact_monthly_kpi'[DigitalAdoptionPct])
+		lineageTag: f4c4064f-3993-4388-9e50-59405bf36868
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Legacy organization the record came from: Contoso CU or Fabrikam CU.
+	column SourceCU
+		dataType: string
+		lineageTag: 479e958b-c26e-406f-a2cf-5fbc6963d8be
+		summarizeBy: none
+		sourceColumn: SourceCU
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Branch key that is unique across the merged organization (CON- or FAB- prefix plus the legacy branch code).
+	column SourceBranchKey
+		dataType: string
+		lineageTag: 6ae18d7a-325e-48f9-bdb5-aee9defd8e86
+		summarizeBy: none
+		sourceColumn: SourceBranchKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthStart
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dc3dc4d6-7c35-4663-96b3-7ff735209778
+		summarizeBy: none
+		sourceColumn: MonthStart
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Legacy branch code. Not unique across the merged organization; use SourceBranchKey to join.
+	column BranchId
+		dataType: string
+		lineageTag: 251e3238-93cf-430e-a118-f55b9fc0eac3
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Enterprise region: North, South, East or West. Used by row-level security.
+	column Region
+		dataType: string
+		lineageTag: b3023cbd-a039-434b-883e-22befcf92553
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoansBooked
+		dataType: int64
+		formatString: 0
+		lineageTag: d10b5646-0e7f-49ae-8d2d-116f561b8b1c
+		summarizeBy: sum
+		sourceColumn: LoansBooked
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepositGrowthPct
+		dataType: double
+		lineageTag: 5dc3e0c3-b503-4536-9ae6-38a8906c239f
+		summarizeBy: sum
+		sourceColumn: DepositGrowthPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NPS
+		dataType: double
+		lineageTag: cdaf675d-9c16-4aa5-840c-429cad9f66eb
+		summarizeBy: sum
+		sourceColumn: NPS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DelinquencyRatePct
+		dataType: double
+		lineageTag: d64fb355-95f6-4edc-a213-f6fe27f0c066
+		summarizeBy: sum
+		sourceColumn: DelinquencyRatePct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DigitalAdoptionPct
+		dataType: double
+		lineageTag: 70dece0d-7427-4957-8761-5e84783f83c6
+		summarizeBy: sum
+		sourceColumn: DigitalAdoptionPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_monthly_kpi = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlEndpoint, WarehouseName),
+				    Data = Source{[Schema="combined",Item="fact_monthly_kpi"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

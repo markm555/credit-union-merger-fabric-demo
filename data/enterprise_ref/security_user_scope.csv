@@ -1,0 +1,7 @@
+UserUPN,RoleName,Region
+north_director@{TENANT_DOMAIN},RegionalDirector,North
+south_director@{TENANT_DOMAIN},RegionalDirector,South
+east_director@{TENANT_DOMAIN},RegionalDirector,East
+west_director@{TENANT_DOMAIN},RegionalDirector,West
+retail_exec@{TENANT_DOMAIN},Executive,ALL
+mgmt_analyst@{TENANT_DOMAIN},Analyst,ALL

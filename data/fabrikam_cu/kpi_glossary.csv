@@ -1,0 +1,4 @@
+kpi_name,definition,owner
+delinquency_rate,Share of the loan portfolio 60+ days past due (legacy board metric).,Fabrikam Lending
+nps_score,Net Promoter Score from quarterly relationship surveys.,Fabrikam Marketing
+digital_active_rate,"Members with any digital transaction in the month, as a fraction.",Fabrikam Digital

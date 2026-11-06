@@ -1,0 +1,68 @@
+table 'dim_branch'
+	lineageTag: b92a602f-bcc8-490c-a4e7-642b0d941843
+
+	/// Legacy organization the record came from: Contoso CU or Fabrikam CU.
+	column SourceCU
+		dataType: string
+		lineageTag: 06a526ac-3a9c-4376-9aa9-a2dbe2b9cbf7
+		summarizeBy: none
+		sourceColumn: SourceCU
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Branch key that is unique across the merged organization (CON- or FAB- prefix plus the legacy branch code).
+	column SourceBranchKey
+		dataType: string
+		lineageTag: 759df9f7-4849-4b7f-9d5a-258260a683b9
+		summarizeBy: none
+		sourceColumn: SourceBranchKey
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Legacy branch code. Not unique across the merged organization; use SourceBranchKey to join.
+	column BranchId
+		dataType: string
+		lineageTag: 0e01e025-3fd9-4703-a3cc-d8b5448f7a80
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		lineageTag: 50f0816b-ddc2-4b70-8c25-9fa1bd8b2ac9
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Enterprise region: North, South, East or West. Used by row-level security.
+	column Region
+		dataType: string
+		lineageTag: 08cf7ce5-9a4f-4804-b388-1e282e1d75a9
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 76e3f416-1ff1-4998-9cd2-7ee258545c84
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_branch = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlEndpoint, WarehouseName),
+				    Data = Source{[Schema="combined",Item="dim_branch"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

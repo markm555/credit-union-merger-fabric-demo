@@ -1,0 +1,106 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "195039267ccd231828b3",
+  "position": {
+    "x": 0,
+    "y": 520.54054054054052,
+    "z": 1,
+    "height": 544.86486486486478,
+    "width": 1908.6486486486485,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_driver_breakdown"
+                    }
+                  },
+                  "Property": "DriverName"
+                }
+              },
+              "queryRef": "fact_driver_breakdown.DriverName",
+              "nativeQueryRef": "DriverName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_driver_breakdown"
+                    }
+                  },
+                  "Property": "Driver Impact"
+                }
+              },
+              "queryRef": "fact_driver_breakdown.Driver Impact",
+              "nativeQueryRef": "Driver Impact"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_driver_breakdown"
+                  }
+                },
+                "Property": "Driver Impact"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6daa9668f86f7c9089eb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_driver_breakdown"
+              }
+            },
+            "Property": "DriverName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "dffe924eec54bec7824b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_driver_breakdown"
+              }
+            },
+            "Property": "Driver Impact"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

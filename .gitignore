@@ -1,0 +1,15 @@
+# Power BI Project - local and cached files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix
+*.pbit
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets and local config - never commit
+.env
+*.env
+**/Users.txt

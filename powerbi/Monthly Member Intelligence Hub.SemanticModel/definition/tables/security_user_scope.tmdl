@@ -1,0 +1,41 @@
+table 'security_user_scope'
+	lineageTag: ecae5412-8208-40bd-8b51-6c21e0ce786f
+
+	column UserUPN
+		dataType: string
+		lineageTag: 4b887aa1-fa2d-457d-810d-b974026affba
+		summarizeBy: none
+		sourceColumn: UserUPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column RoleName
+		dataType: string
+		lineageTag: cbe68c97-c46e-4d32-b0be-1fcafd612c65
+		summarizeBy: none
+		sourceColumn: RoleName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Enterprise region: North, South, East or West. Used by row-level security.
+	column Region
+		dataType: string
+		lineageTag: 0fc7739e-23d3-4992-92be-51dd1612a170
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition security_user_scope = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlEndpoint, WarehouseName),
+				    Data = Source{[Schema="combined",Item="security_user_scope"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

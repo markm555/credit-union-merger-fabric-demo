@@ -1,0 +1,12 @@
+branch_code,branch_name,region_code,state_code
+BR001,Boston Back Bay,E,MA
+BR002,Worcester,E,MA
+BR003,Cambridge,E,MA
+BR004,Nashua,E,NH
+BR005,Manchester,E,NH
+BR006,Providence,E,RI
+BR007,Hartford,E,CT
+BR008,Portland Old Port,N,ME
+BR009,Burlington,N,VT
+BR010,Charlotte,S,NC
+BR011,Denver Tech Center,W,CO
